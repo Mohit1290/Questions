@@ -1,0 +1,27 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        unordered_set<string> st;
+        for(int row = 0; row < 9; row++) {
+            for(int col = 0; col < 9; col++) {
+                
+
+                if(board[row][col] == '.') continue;
+                        // conveting the num in string.      seprator  storing the index
+                string row_str = string(1, board[row][col]) +"_ROW_"+ to_string(row);
+                string col_str = string(1, board[row][col]) +"_COL_"+to_string(col);
+                string box_str = string(1, board[row][col])+"_BOX_"+ to_string(row/3) + to_string(col/3);
+
+                if(st.find(row_str) != st.end() || st.find(col_str) != st.end() || st.find(box_str) != st.end()) {
+                    return false;
+                }
+
+                st.insert(row_str);
+                st.insert(col_str);
+                st.insert(box_str);
+            }
+        }
+
+        return true;
+    }
+};
